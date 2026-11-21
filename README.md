@@ -14,7 +14,7 @@ When several agents work on one repository at once, branches pile up quickly, co
 
 Tools for each of these problems already exist, but they are spread across many projects. These tools attempt to fill the gaps that remained, and most of them can be chained together.
 
-They came out of a field study of the tools already available. The method was documentation, real use, testing, licence compliance and attribution, with no reverse engineering. The [field study](field-study.md) gives the method and findings, and [related tools](related-tools.md) shows other projects alongside these, for comparison.
+Each tool was then checked against the tools already available, in a field study; glassbox came directly out of one, a study of the Sysinternals Suite. The method was documentation, real use, testing, licence compliance and attribution, with no reverse engineering. The [field study](field-study.md) gives the method and findings, and [related tools](related-tools.md) shows other projects alongside these, for comparison.
 
 ## Where each tool runs
 
@@ -26,7 +26,7 @@ They came out of a field study of the tools already available. The method was do
 | Before merge | Can PR titles, issue bodies or fork code reach a secret or publishing token in GitHub Actions? | [trust-path](https://github.com/jacob-adm/trust-path) | `pip install trust-path` | <a href="https://pypi.org/project/trust-path/"><img src="https://img.shields.io/pypi/v/trust-path?style=flat-square&color=0F6378&label=PyPI" alt="trust-path on PyPI"></a> |
 | | Do all open pull requests merge and pass tests together? | [pr-merge-audit](https://github.com/jacob-adm/pr-merge-audit) | `pip install pr-merge-audit` | <a href="https://pypi.org/project/pr-merge-audit/"><img src="https://img.shields.io/pypi/v/pr-merge-audit?style=flat-square&color=0F6378&label=PyPI" alt="pr-merge-audit on PyPI"></a> |
 | Dependencies and releases | What changed between two releases, and what new code runs at install or startup? | [release-drift](https://github.com/jacob-adm/release-drift) | `pip install release-drift` | <a href="https://pypi.org/project/release-drift/"><img src="https://img.shields.io/pypi/v/release-drift?style=flat-square&color=0F6378&label=PyPI" alt="release-drift on PyPI"></a> |
-| Afterwards | How long did fixed bugs live, in commits, days and releases? | [bug-age](https://github.com/jacob-adm/bug-age) | `pip install bug-age` | <a href="https://pypi.org/project/bug-age/"><img src="https://img.shields.io/pypi/v/bug-age?style=flat-square&color=0F6378&label=PyPI" alt="bug-age on PyPI"></a> |
+| Afterwards (any project) | How long did fixed bugs live, in commits, days and releases? | [bug-age](https://github.com/jacob-adm/bug-age) | `pip install bug-age` | <a href="https://pypi.org/project/bug-age/"><img src="https://img.shields.io/pypi/v/bug-age?style=flat-square&color=0F6378&label=PyPI" alt="bug-age on PyPI"></a> |
 
 Every tool documents its exit statuses, so it can run in CI or act as a gate for an agent. trust-path, release-drift, glassbox and devdrop print JSON with `--json`, git-surface and git-overlap write tab-separated records, and pr-merge-audit and bug-age write JSON result files.
 
@@ -56,7 +56,7 @@ glassbox reach --strict --json > reach.json && my-agent
 
 The agent starts only when no sensitive location, such as SSH keys or cloud credentials, is readable.
 
-The tested stacks, with their real output, are in [git-surface: using it with other tools](https://github.com/jacob-adm/git-surface/blob/main/docs/other-tools.md) and [glassbox: using glassbox with other tools](https://github.com/jacob-adm/glassbox/blob/main/docs/integration.md).
+These stacks are shell pipelines: there is no single command or packaged CI action that runs them. The tested stacks, with their real output, are in [git-surface: using it with other tools](https://github.com/jacob-adm/git-surface/blob/main/docs/other-tools.md) and [glassbox: using glassbox with other tools](https://github.com/jacob-adm/glassbox/blob/main/docs/integration.md).
 
 ## Mobile: devdrop
 
@@ -79,6 +79,16 @@ pip install git+https://github.com/jacob-adm/devdrop
 - Try it without changing your machine: `./tests/sandbox.sh` opens a throwaway Ubuntu 24.04 container.
 - Use it every day on Ubuntu 22.04 or 24.04, on a PC, a VM, WSL2 or a cloud server.
 - Use it on a headless cloud GPU server with `./install.sh --profile cloud`.
+
+## Status and limits
+
+- **New.** All eight were first published in November 2026 and have been tested on demo and public repositories.
+- **trust-path** covers ground that zizmor, poutine, octoscan and Gato-X also cover. Its benchmark shows where it and zizmor report the same findings and where they differ. Some of those differences may belong upstream rather than in a separate tool.
+- **release-drift** checks PyPI and npm releases. Its README cites the incidents it is built to catch, but a worked example on one of them is not published yet.
+- **git-overlap** reports textual conflicts only. Symbol-level overlap, a merge order and a live view are in Grove, not here. git-overlap and git-surface write tab-separated text, not JSON.
+- **bug-age** measures any Rust or Python project after the fact. Nothing in it is specific to AI agents.
+- **glassbox** runs on macOS and Linux. It reports what a process can reach and does not enforce anything; pair it with a sandbox for that.
+- **devdrop** is tested on emulators, simulators and a physical iPhone, not yet on physical Android devices or iPads. It is not on PyPI.
 
 ## Studies
 
