@@ -28,7 +28,7 @@ Each tool was then checked against the tools already available, in a field study
 | Dependencies and releases | What changed between two releases, and what new code runs at install or startup? | [release-drift](https://github.com/jacob-adm/release-drift) | `pip install release-drift` | <a href="https://pypi.org/project/release-drift/"><img src="https://img.shields.io/pypi/v/release-drift?style=flat-square&color=0F6378&label=PyPI" alt="release-drift on PyPI"></a> |
 | Afterwards (any project) | How long did fixed bugs live, in commits, days and releases? | [bug-age](https://github.com/jacob-adm/bug-age) | `pip install bug-age` | <a href="https://pypi.org/project/bug-age/"><img src="https://img.shields.io/pypi/v/bug-age?style=flat-square&color=0F6378&label=PyPI" alt="bug-age on PyPI"></a> |
 
-Every tool documents its exit statuses, so it can run in CI or act as a gate for an agent. trust-path, release-drift, git-surface, git-overlap, glassbox and devdrop print JSON with `--json`, and pr-merge-audit and bug-age write JSON result files. git-surface and git-overlap write tab-separated records by default, so they can feed each other in a pipeline.
+Every tool documents its exit statuses, so it can run in CI or act as a gate for an agent. trust-path, release-drift, git-surface, git-overlap, glassbox and devdrop print JSON with `--json`, pr-merge-audit with `report --json`, and bug-age prints JSON by default. git-surface and git-overlap write tab-separated records by default, so they can feed each other in a pipeline.
 
 ## Stacking the tools
 
