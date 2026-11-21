@@ -28,7 +28,7 @@ Each tool was then checked against the tools already available, in a field study
 | Dependencies and releases | What changed between two releases, and what new code runs at install or startup? | [release-drift](https://github.com/jacob-adm/release-drift) | `pip install release-drift` | <a href="https://pypi.org/project/release-drift/"><img src="https://img.shields.io/pypi/v/release-drift?style=flat-square&color=0F6378&label=PyPI" alt="release-drift on PyPI"></a> |
 | Afterwards (any project) | How long did fixed bugs live, in commits, days and releases? | [bug-age](https://github.com/jacob-adm/bug-age) | `pip install bug-age` | <a href="https://pypi.org/project/bug-age/"><img src="https://img.shields.io/pypi/v/bug-age?style=flat-square&color=0F6378&label=PyPI" alt="bug-age on PyPI"></a> |
 
-Every tool documents its exit statuses, so it can run in CI or act as a gate for an agent. trust-path, release-drift, glassbox and devdrop print JSON with `--json`, git-surface and git-overlap write tab-separated records, and pr-merge-audit and bug-age write JSON result files.
+Every tool documents its exit statuses, so it can run in CI or act as a gate for an agent. trust-path, release-drift, git-surface, git-overlap, glassbox and devdrop print JSON with `--json`, and pr-merge-audit and bug-age write JSON result files. git-surface and git-overlap write tab-separated records by default, so they can feed each other in a pipeline.
 
 ## Stacking the tools
 
@@ -85,7 +85,7 @@ pip install git+https://github.com/jacob-adm/devdrop
 - **New.** All eight were first published in November 2026 and have been tested on demo and public repositories.
 - **trust-path** covers ground that zizmor, poutine, octoscan and Gato-X also cover. Its benchmark shows where it and zizmor report the same findings and where they differ. Some of those differences may belong upstream rather than in a separate tool.
 - **release-drift** checks PyPI and npm releases. Its README cites the incidents it is built to catch, but a worked example on one of them is not published yet.
-- **git-overlap** reports textual conflicts only. Symbol-level overlap, a merge order and a live view are in Grove, not here. git-overlap and git-surface write tab-separated text, not JSON.
+- **git-overlap** reports textual conflicts only. Symbol-level overlap, a merge order and a live view are in Grove, not here.
 - **bug-age** measures any Rust or Python project after the fact. Nothing in it is specific to AI agents.
 - **glassbox** runs on macOS and Linux. It reports what a process can reach and does not enforce anything; pair it with a sandbox for that.
 - **devdrop** is tested on emulators, simulators and a physical iPhone, not yet on physical Android devices or iPads. It is not on PyPI.
