@@ -10,7 +10,9 @@ Command-line tools for branch hygiene, merge quality and software supply-chain s
 
 ## The suite
 
-When several agents work on one repository at once, branches pile up quickly, collide in the same files, and sometimes change code that runs or is trusted: workflows, hooks, install scripts, dependencies. Tools for each of these problems already exist, but they are spread across many small projects. These tools fill the gaps that remained, and most of them can be chained together.
+When several agents work on one repository at once, branches pile up quickly, collide in the same files, and sometimes change code that runs or is trusted: workflows, hooks, install scripts, dependencies.
+
+Tools for each of these problems already exist, but they are spread across many projects. These tools attempt to fill the gaps that remained, and most of them can be chained together.
 
 They came out of a field study of the tools already available. The method was documentation, real use, testing, licence compliance and attribution, with no reverse engineering. The [field study](field-study.md) gives the method and findings, and [related tools](related-tools.md) shows other projects alongside these, for comparison.
 
