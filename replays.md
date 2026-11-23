@@ -94,8 +94,9 @@ not be compared.
 
 ## Limits
 
-- **A record is a warning, not a verdict.** How often the same kinds of record appear for ordinary
-  releases has not been measured yet.
+- **A record is a warning, not a verdict.** The same kinds of record also appear for ordinary
+  releases. How often is measured in release-drift's
+  [Findings on ordinary releases](https://github.com/jacob-adm/release-drift/blob/main/docs/noise.md).
 - **axios after the fix** was checked against the clean 1.14.0 `package.json` with the added
   dependency, the change the attack made, not against the deleted sample.
 - **tensorlake.** The advisory says the payload ran through a `preinstall` hook. The sample's root

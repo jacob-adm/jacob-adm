@@ -95,7 +95,7 @@ pip install git+https://github.com/jacob-adm/devdrop
 | Study | What it covers |
 |:--|:--|
 | [Field study](field-study.md) | Method and findings: prior art for every tool, and where the gaps were |
-| [Replaying the 2026 attacks](replays.md) | Six real supply-chain attacks replayed against trust-path and release-drift: what each tool reported, what it missed and what was fixed |
+| [Replaying the 2026 attacks](replays.md) | Five real supply-chain attacks from 2026, seven releases in all, replayed against trust-path and release-drift, then release-drift against 121 attack samples it had not been tuned on: what each tool reported, what it missed and what was fixed |
 | [Related tools](related-tools.md) | Other projects alongside these, with what each covers and how they were tested |
 | [Sysinternals Suite study](https://github.com/jacob-adm/glassbox/blob/main/docs/suite-study.md) | All 79 Suite tools: licence position, which concepts carry over to macOS, Linux and agent tooling |
 | [Feasibility and prior art](https://github.com/jacob-adm/glassbox/blob/main/docs/feasibility.md) | Each glassbox candidate checked against existing projects, with a decision to build, skip or adopt |
