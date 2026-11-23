@@ -83,8 +83,8 @@ pip install git+https://github.com/jacob-adm/devdrop
 ## Status and limits
 
 - **New.** All eight were first published in November 2026 and have been tested on demo and public repositories.
-- **trust-path** covers ground that zizmor, poutine, octoscan and Gato-X also cover. Its benchmark shows where it and zizmor report the same findings and where they differ. Some of those differences may belong upstream rather than in a separate tool.
-- **release-drift** checks PyPI and npm releases. Its README cites the incidents it is built to catch, but a worked example on one of them is not published yet.
+- **trust-path** covers ground that zizmor, poutine, octoscan and Gato-X also cover. Its benchmark shows where it and zizmor report the same findings and where they differ. Some of those differences may belong upstream rather than in a separate tool. Replayed against the TanStack worm of May 2026, it missed the attack until 0.6.0, which follows pull request code through the Actions cache.
+- **release-drift** checks PyPI and npm releases. Replayed against six malicious package releases from 2026, version 0.1.2 reported five and 0.2.0 reports all six; see [Replaying the 2026 attacks](replays.md). How often it warns on ordinary releases has not been measured yet.
 - **git-overlap** reports textual conflicts only. Symbol-level overlap, a merge order and a live view are in Grove, not here.
 - **bug-age** measures any Rust or Python project after the fact. Nothing in it is specific to AI agents.
 - **glassbox** runs on macOS and Linux. It reports what a process can reach and does not enforce anything; pair it with a sandbox for that.
@@ -95,6 +95,7 @@ pip install git+https://github.com/jacob-adm/devdrop
 | Study | What it covers |
 |:--|:--|
 | [Field study](field-study.md) | Method and findings: prior art for every tool, and where the gaps were |
+| [Replaying the 2026 attacks](replays.md) | Six real supply-chain attacks replayed against trust-path and release-drift: what each tool reported, what it missed and what was fixed |
 | [Related tools](related-tools.md) | Other projects alongside these, with what each covers and how they were tested |
 | [Sysinternals Suite study](https://github.com/jacob-adm/glassbox/blob/main/docs/suite-study.md) | All 79 Suite tools: licence position, which concepts carry over to macOS, Linux and agent tooling |
 | [Feasibility and prior art](https://github.com/jacob-adm/glassbox/blob/main/docs/feasibility.md) | Each glassbox candidate checked against existing projects, with a decision to build, skip or adopt |
