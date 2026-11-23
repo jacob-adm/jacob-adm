@@ -54,6 +54,10 @@ the first release with the fix.
 
 ## Held-out test
 
+> **Under re-check.** After this run, a later test found that the dataset stores some files as a
+> directory of the same name holding the file, which this run did not account for. The numbers below
+> are being re-run with that corrected and will be replaced.
+
 The fixes above were shaped by the six replayed packages, so release-drift was then tested on
 attacks it had not seen. The sample was fixed before any download: every sample from 2026 in the
 dataset's hijacked-package category (`compromised_lib`), minus the five above that are in it, left
