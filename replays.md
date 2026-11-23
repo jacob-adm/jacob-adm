@@ -1,6 +1,6 @@
 # Replaying the 2026 supply-chain attacks
 
-The suite was tested against five real supply-chain attacks from 2026, seven releases in all, to see whether each tool
+The suite was tested against five real supply-chain attacks from 2026, seven releases in all, and then against 121 attack samples it had not been tuned on, to see whether each tool
 raises a warning on the actual attack and not only on examples written for its tests. This page
 lists what was run, what each tool reported, what it missed, and what was changed as a result.
 
@@ -51,6 +51,35 @@ the first release with the fix.
   directory above `package/`. That is not the documented form, and release-drift silently
   compared it one level too high and missed the install scripts. Repacked as `.tgz`, both were
   reported. release-drift 0.2.0 reads that directory from inside `package/`.
+
+## Held-out test
+
+The fixes above were shaped by the six replayed packages, so release-drift was then tested on
+attacks it had not seen. The sample was fixed before any download: every sample from 2026 in the
+dataset's hijacked-package category (`compromised_lib`), minus the five above that are in it, left
+21 PyPI samples and 522 npm samples. All 21 PyPI samples and 100 npm samples chosen with a fixed random seed were
+taken, 121 in all. Each was compared with the highest earlier release not itself in the dataset, or
+with an empty package when there was none (10 cases). The run used release-drift's main branch as
+of 23 November 2026, in the same sealed container, and the samples were deleted afterwards.
+
+| | Compared | Reported | Missed |
+| --- | --- | --- | --- |
+| npm | 100 | 100 | 0 |
+| PyPI | 19 | 14 | 5 |
+| All | 119 | 114 (95.8%) | 5 |
+
+Two PyPI samples (xinference 2.6.1 and 2.6.2) hold module files without package metadata and could
+not be compared.
+
+- **Misses.** All five are PyPI wheels: durabletask 1.4.1, 1.4.2 and 1.4.3, guardrails-ai 0.10.1
+  and mistralai 2.4.6. In each, the only changed Python files are package `__init__.py` modules,
+  and the added lines import `subprocess` and `urllib.request`. The payload is ordinary Python that
+  runs when the package is imported, with no install script, startup file or encoded blob, and
+  release-drift does not classify ordinary module code. These misses were not fixed one by one.
+- **The npm result counts campaigns more than once.** 23 samples are one campaign, packages that
+  each added the dependency `easy-day-js`, and the install scripts found across all 100 are 10
+  distinct commands. Six samples were reported only for new dependencies on common libraries,
+  which may not be the attack itself.
 
 ## Checks that keep passing
 
