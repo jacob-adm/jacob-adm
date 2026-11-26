@@ -28,7 +28,7 @@ built or run.
 | TanStack worm (May) | [postmortem](https://tanstack.com/blog/npm-supply-chain-compromise-postmortem) | trust-path | No record | `cache` path from `bundle-size.yml` to `release.yml`, which holds `id-token: write` (0.6.0) |
 | LiteLLM 1.82.7 | [GHSA-5mg7-485q-xm76](https://github.com/advisories/GHSA-5mg7-485q-xm76) | release-drift | `blob added` in `litellm/proxy/proxy_server.py` | Same |
 | LiteLLM 1.82.8 | [GHSA-5mg7-485q-xm76](https://github.com/advisories/GHSA-5mg7-485q-xm76) | release-drift | `pth added litellm_init.pth` | Same |
-| tensorlake 0.5.144 | [GHSA-8g63-53c9-65j2](https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2) | release-drift | `blob added` (14) and `url-host added` (4) in `lib/Math_Symbol.js` | Same |
+| tensorlake 0.5.144 | [GHSA-8g63-53c9-65j2](https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2) | release-drift | `blob added` (14) and `url-host added` (3) in `lib/Math_Symbol.js`; `npm-script added preinstall=node lib/setup.mjs` (see the note below) | Same |
 | Cline 2.3.0 | [GHSA-9ppg-jx86-fqw7](https://github.com/cline/cline/security/advisories/GHSA-9ppg-jx86-fqw7) | release-drift | `npm-script added postinstall=npm install -g openclaw@latest` | Same |
 | plain-crypto-js 4.2.1 | [axios postmortem](https://github.com/axios/axios/issues/10636) | release-drift | `npm-script added postinstall=node setup.js` | Same |
 | axios 1.14.1 | [axios postmortem](https://github.com/axios/axios/issues/10636) | release-drift | No record | `dependency added dependencies plain-crypto-js` (0.2.0) |
@@ -99,7 +99,15 @@ not be compared.
   [Findings on ordinary releases](https://github.com/jacob-adm/release-drift/blob/main/docs/noise.md).
 - **axios after the fix** was checked against the clean 1.14.0 `package.json` with the added
   dependency, the change the attack made, not against the deleted sample.
-- **tensorlake.** The advisory says the payload ran through a `preinstall` hook. The sample's root
-  `package.json` held no install script, and release-drift reported the encoded code and new hosts
-  instead. The difference is not resolved.
+- **tensorlake.** The advisory says the payload ran through a `preinstall` hook, and the sample
+  has one: its `package.json` holds `"preinstall": "node lib/setup.mjs"`. The first replay passed
+  release-drift the dataset's folder for the sample, which holds the package one level down
+  (`package/`) beside a `package_info` file, so the package's own `package.json` was not read as
+  the root. That run reported the 14 blobs, the 3 hosts in `lib/Math_Symbol.js` and a fourth host,
+  `slsa.dev`, from the `package_info` file, and no install script. Given the `package/` folder or a
+  tarball of it, release-drift 0.1.2 and 0.6.0 also report
+  `npm-script added package.json preinstall=node lib/setup.mjs`. Re-checked on 26 November 2026 in
+  the same sealed container. The six `tensorlake-native-*` 0.5.144 packages that the advisory also
+  names are still on npm; none of their `package.json` files has a script, and each holds only
+  `package.json` and the native library.
 - **Not replayed.** axios 0.30.4, the second malicious axios release, is not in the dataset.
