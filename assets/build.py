@@ -24,21 +24,16 @@ TOOLS = {
     "workstation": ("Hardened, reproducible environment for running coding agents, with supply-chain "
                     "quarantine, credential isolation, worktree isolation, task-queue supervision.",
                     "./tests/sandbox.sh", ["Ubuntu", "macOS", "shell"]),
-    "git-surface": ("Reports which branches change code that runs or is trusted, such as workflows, hooks, "
-                    "install scripts, lockfiles, hidden content.",
-                    "pip install git-surface", ["CI recipe", "JSON", "TSV"]),
-    "git-overlap": ("Shows which branches will conflict before any merge, including uncommitted "
-                    "work in worktrees.",
-                    "pip install git-overlap", ["JSON", "TSV", "git"]),
-    "trust-path": ("Lists the paths by which PR titles, issue bodies or fork code can reach a "
-                   "secret or publishing token in GitHub Actions.",
-                   "pip install trust-path", ["CI recipe", "JSON", "Actions"]),
-    "pr-merge-audit": ("Merge-tests every open pull request together and reports which combine, "
-                       "which conflict and which break each other's tests.",
-                       "pip install pr-merge-audit", ["JSON report", "offline build"]),
-    "release-drift": ("Compares two releases of a package, or a lockfile change, and shows the files that "
-                      "differ and the new code that runs at install or startup.",
-                      "pip install release-drift", ["CI recipe", "JSON", "PyPI", "npm"]),
+    "git-surface": ("Flags agent branches that change what runs or is trusted, such as CLAUDE.md, AGENTS.md, .mcp.json, hooks, workflows and lockfiles.",
+        "pip install git-surface", ["CI recipe", "agent configs", "JSON"]),
+    "git-overlap": ("Shows which parallel agent branches will conflict before any merge, including uncommitted work in agent worktrees.",
+        "pip install git-overlap", ["parallel agents", "worktrees", "JSON"]),
+    "trust-path": ("Finds where issue or pull request text can reach an AI agent action holding a secret, or a publishing token, in GitHub Actions.",
+        "pip install trust-path", ["CI recipe", "agent actions", "JSON"]),
+    "pr-merge-audit": ("Merge-tests every open pull request together, so a batch of agent pull requests shows which combine, which conflict and which break tests.",
+        "pip install pr-merge-audit", ["agent pull requests", "JSON report"]),
+    "release-drift": ("Compares each package a lockfile change upgrades, so an agent's dependency bump shows the new code that runs at install or startup.",
+        "pip install release-drift", ["CI recipe", "JSON", "PyPI", "npm"]),
     "devdrop": ("Installs one Android or iOS build on every attached phone, tablet, emulator and "
                 "simulator, and skips any device the build cannot run on, with the reason.",
                 "pip install git+https://github.com/jacob-adm/devdrop", ["JUnit", "JSON", "adb", "Xcode"]),
@@ -52,7 +47,7 @@ TOOLS = {
 
 GROUPS = {
     "g1": ("01", "Agent harness", "Contain and audit the agent itself, before, during and after a session."),
-    "g2": ("02", "DevOps toolchain", "Check what branches and pull requests change before they merge. Each runs in CI or as an agent gate."),
+    "g2": ("02", "Agentic DevOps", "Gates for repositories where coding agents write the branches, pull requests and dependency changes."),
     "g3": ("03", "Mobile", "Builds onto every device on the desk at once."),
     "g4": ("04", "Research", "Measurement, experiments and the studies behind the tools."),
 }

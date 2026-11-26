@@ -6,7 +6,7 @@
 
 Tools for QA, agent harnesses and DevOps toolchains.
 
-<b><a href="#01-agent-harness">Agent harness</a>&emsp;<a href="#02-devops-toolchain">DevOps toolchain</a>&emsp;<a href="#03-mobile">Mobile</a>&emsp;<a href="#04-research">Research</a>&emsp;<a href="#status-and-limits">Status and limits</a></b>
+<b><a href="#01-agent-harness">Agent harness</a>&emsp;<a href="#02-agentic-devops">Agentic DevOps</a>&emsp;<a href="#03-mobile">Mobile</a>&emsp;<a href="#04-research">Research</a>&emsp;<a href="#status-and-limits">Status and limits</a></b>
 
 </div>
 
@@ -80,7 +80,7 @@ These stacks are shell pipelines. There is no single command or packaged CI acti
 
 </details>
 
-<h2 id="02-devops-toolchain"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/g2.svg"><img src="assets/g2.svg" alt="02 DevOps toolchain" width="100%"></picture></h2>
+<h2 id="02-agentic-devops"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/g2.svg"><img src="assets/g2.svg" alt="02 Agentic DevOps" width="100%"></picture></h2>
 
 <p>
 <a href="https://github.com/jacob-adm/git-surface"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/git-surface.svg"><img src="assets/git-surface.svg" alt="git-surface" width="49%"></picture></a>
