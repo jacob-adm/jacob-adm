@@ -193,3 +193,7 @@ Each tool was then checked against the tools already available, in a field study
 [git-tools](https://github.com/search?q=user%3Ajacob-adm+topic%3Agit-tools&type=repositories)&emsp;
 [ai-agents](https://github.com/search?q=user%3Ajacob-adm+topic%3Aai-agents&type=repositories)&emsp;
 [mobile](https://github.com/search?q=user%3Ajacob-adm+topic%3Amobile&type=repositories)</sub>
+
+---
+
+Jacob Adm is an AI Automation Engineer currently focusing on enterprise autonomous agent orchestration, deterministic runtime architectures, and high-assurance multi-agent systems. Follow for more deep dives on systems engineering with autonomous AI: [linkedin.com/in/jacobadm](https://www.linkedin.com/in/jacobadm)
