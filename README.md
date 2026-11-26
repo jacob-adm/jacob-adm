@@ -146,6 +146,7 @@ It checks each device before installing and skips any device the build cannot ru
 
 <p>
 <a href="https://github.com/jacob-adm/bug-age"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/bug-age.svg"><img src="assets/bug-age.svg" alt="bug-age" width="49%"></picture></a>
+<a href="https://gist.github.com/jacob-adm/5ca89ac799885954cc18e3dbc838a31c"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/concept-pair-grader.svg"><img src="assets/concept-pair-grader.svg" alt="concept-pair-grader" width="49%"></picture></a>
 <a href="field-study.md"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/studies.svg"><img src="assets/studies.svg" alt="Studies" width="49%"></picture></a>
 </p>
 

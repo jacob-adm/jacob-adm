@@ -40,6 +40,9 @@ TOOLS = {
     "bug-age": ("Measures how long fixed bugs lived, in commits, days and releases, from git "
                 "history alone. Rust and Python projects.",
                 "pip install bug-age", ["JSON", "metrics"]),
+    "concept-pair-grader": ("Notebook that measures whether independent human and AI judges agree with "
+                            "the 38 grades in an interdisciplinary concept assessment.",
+                            "concept_pair_grader.ipynb", ["notebook", "AI judges", "Krippendorff's alpha"]),
     "studies": ("Field study, attack replays, benchmarks and related tools, with the method and "
                 "evidence behind each tool and what it missed.",
                 "field-study.md and replays.md", ["method", "replays", "benchmarks"]),
