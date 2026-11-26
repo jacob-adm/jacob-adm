@@ -19,6 +19,7 @@ The command-line tools run unattended, in a CI job, a git hook or an agent harne
 <h2 id="01-agent-harness"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/g1.svg"><img src="assets/g1.svg" alt="01 Agent harness" width="100%"></picture></h2>
 
 <p>
+<a href="https://homenet-master-blueprint.netlify.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/homenet.svg"><img src="assets/homenet.svg" alt="homenet architecture blueprint" width="49%"></picture></a>
 <a href="https://github.com/jacob-adm/glassbox"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/glassbox.svg"><img src="assets/glassbox.svg" alt="glassbox" width="49%"></picture></a>
 <a href="https://github.com/jacob-adm/ai-automation-engineer-workstation"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/workstation.svg"><img src="assets/workstation.svg" alt="ai-automation-engineer-workstation" width="49%"></picture></a>
 </p>
@@ -147,6 +148,8 @@ It checks each device before installing and skips any device the build cannot ru
 <p>
 <a href="https://github.com/jacob-adm/bug-age"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/bug-age.svg"><img src="assets/bug-age.svg" alt="bug-age" width="49%"></picture></a>
 <a href="https://gist.github.com/jacob-adm/5ca89ac799885954cc18e3dbc838a31c"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/concept-pair-grader.svg"><img src="assets/concept-pair-grader.svg" alt="concept-pair-grader" width="49%"></picture></a>
+<a href="https://github.com/jacob-adm/ergonet-artifacts"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ergonet.svg"><img src="assets/ergonet.svg" alt="ergonet demo" width="49%"></picture></a>
+<a href="https://ergonet-tracker-showcase.netlify.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ergonet-tracker.svg"><img src="assets/ergonet-tracker.svg" alt="ergonet-tracker showcase" width="49%"></picture></a>
 <a href="field-study.md"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/studies.svg"><img src="assets/studies.svg" alt="Studies" width="49%"></picture></a>
 </p>
 
