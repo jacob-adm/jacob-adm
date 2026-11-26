@@ -18,6 +18,9 @@ THEMES = {
 }
 
 TOOLS = {
+    "homenet": ("Architecture blueprint of homenet, an agent context harness for a human operator, "
+                "with six diagrams and a recorded walkthrough of its HUD.",
+                "homenet-master-blueprint.netlify.app", ["architecture", "diagrams", "video"]),
     "glassbox": ("Reports what an agent started from your terminal can read, what it leaves "
                  "behind, and what it does while it runs. macOS and Linux.",
                  "brew install jacob-adm/tap/glassbox", ["gate", "JSON", "Rust"]),
@@ -43,6 +46,12 @@ TOOLS = {
     "concept-pair-grader": ("Notebook that measures whether independent human and AI judges agree with "
                             "the 38 grades in an interdisciplinary concept assessment.",
                             "concept_pair_grader.ipynb", ["notebook", "AI judges", "Krippendorff's alpha"]),
+    "ergonet": ("Uncut demo of Ergonet, a multi-agent development system with sandboxed "
+                "containers, spend limits and human review gates. Not publicly available.",
+                "jacob-adm.github.io/ergonet-artifacts", ["demo video", "walkthrough", "known issue"]),
+    "ergonet-tracker": ("Project tracker that compiles Gherkin stories into the context an agent needs, "
+                        "standalone or linked to Ergonet. Not publicly available.",
+                        "ergonet-tracker-showcase.netlify.app", ["demo video", "diagrams", "Gherkin"]),
     "studies": ("Field study, attack replays, benchmarks and related tools, with the method and "
                 "evidence behind each tool and what it missed.",
                 "field-study.md and replays.md", ["method", "replays", "benchmarks"]),
