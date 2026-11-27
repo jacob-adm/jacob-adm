@@ -1,7 +1,11 @@
 """Generate the profile README's SVG cards, group headers and flow diagram.
 
+The flow diagram is split into a rail and one image per tool so each tool links to
+its repository; GitHub shows SVGs as images, so links inside one SVG do nothing.
+
 Run from the repository root with python3 assets/build.py.
-Writes assets/<name>.svg (light) and assets/dark/<name>.svg (dark).
+Writes assets/<name>.svg (light) and assets/dark/<name>.svg (dark), and the
+flow block of README.md between its flow:begin and flow:end markers.
 """
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -119,20 +123,63 @@ STAGES = [
 ]
 
 
-def flow(t):
-    w, h = 860, 176
-    col = w / len(STAGES)
-    b = [f'<line x1="{col/2}" y1="44" x2="{w-col/2}" y2="44" stroke="{t["border"]}" stroke-width="2"/>']
-    for i, (stage, tools) in enumerate(STAGES):
-        cx = col * i + col / 2
+REPO = "https://github.com/jacob-adm/"
+CELL_W, CELL_H, RAIL_H = 172, 32, 66
+BEGIN, END = "<!-- flow:begin -->", "<!-- flow:end -->"
+
+
+def slug(tool):
+    return tool.replace(" ", "-")
+
+
+def repo(tool):
+    """glassbox reach and glassbox persist are commands of one tool; the rest are repositories."""
+    return REPO + ("glassbox" if tool.startswith("glassbox ") else slug(tool))
+
+
+def rail(t):
+    w = CELL_W * len(STAGES)
+    b = [f'<line x1="{CELL_W/2}" y1="44" x2="{w-CELL_W/2}" y2="44" stroke="{t["border"]}" stroke-width="2"/>']
+    for i, (stage, _) in enumerate(STAGES):
+        cx = CELL_W * i + CELL_W / 2
         b.append(f'<text x="{cx}" y="18" text-anchor="middle" font-family="{FONT}" font-size="13" font-weight="700" fill="{t["text"]}">{escape(stage)}</text>')
         b.append(f'<circle cx="{cx}" cy="44" r="7" fill="{t["bg"]}" stroke="{t["accent"]}" stroke-width="3"/>')
-        for j, tool in enumerate(tools):
-            y = 70 + j * 32
-            bw = 8 * len(tool) + 20
-            b.append(f'<rect x="{cx - bw/2}" y="{y}" width="{bw}" height="24" rx="6" fill="{t["chip"]}"/>')
-            b.append(f'<text x="{cx}" y="{y+16}" text-anchor="middle" font-family="{MONO}" font-size="12" fill="{t["accent"]}">{escape(tool)}</text>')
-    return svg(w, h, "".join(b))
+    return svg(w, RAIL_H, "".join(b))
+
+
+def chip(tool, t):
+    bw, cx = 8 * len(tool) + 20, CELL_W / 2
+    return svg(CELL_W, CELL_H,
+               f'<rect x="{cx - bw/2}" y="4" width="{bw}" height="24" rx="6" fill="{t["chip"]}"/>'
+               f'<text x="{cx}" y="20" text-anchor="middle" font-family="{MONO}" font-size="12" fill="{t["accent"]}">{escape(tool)}</text>')
+
+
+def picture(name, alt, width):
+    return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/flow/{name}.svg">'
+            f'<img src="assets/flow/{name}.svg" alt="{escape(alt)}" width="{width}"></picture>')
+
+
+def flow_html():
+    """README block: the rail, then one row of linked chips per depth."""
+    stages = "; ".join(f"{s} ({', '.join(tools)})" for s, tools in STAGES)
+    rows = [picture("rail", f"Where each tool runs: {stages}", "100%")]
+    for j in range(max(len(tools) for _, tools in STAGES)):
+        cells = []
+        for _, tools in STAGES:
+            if j < len(tools):
+                tool = tools[j]
+                cells.append(f'<a href="{repo(tool)}">{picture(slug(tool), tool, "20%")}</a>')
+            else:
+                cells.append(picture("blank", "", "20%"))
+        rows.append("".join(cells))
+    return "<p>\n" + "<br>\n".join(rows) + "\n</p>"
+
+
+def write_readme():
+    readme = OUT.parent / "README.md"
+    s = readme.read_text()
+    a, b = s.index(BEGIN) + len(BEGIN), s.index(END)
+    readme.write_text(s[:a] + "\n" + flow_html() + "\n" + s[b:])
 
 
 def main():
@@ -143,7 +190,13 @@ def main():
             (d / f"{name}.svg").write_text(card(name, t))
         for key in GROUPS:
             (d / f"{key}.svg").write_text(header(key, t))
-        (d / "flow.svg").write_text(flow(t))
+        f = d / "flow"
+        f.mkdir(exist_ok=True)
+        (f / "rail.svg").write_text(rail(t))
+        (f / "blank.svg").write_text(svg(CELL_W, CELL_H, ""))
+        for tool in {tool for _, tools in STAGES for tool in tools}:
+            (f / f"{slug(tool)}.svg").write_text(chip(tool, t))
+    write_readme()
 
 
 if __name__ == "__main__":
