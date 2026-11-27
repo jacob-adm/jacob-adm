@@ -41,6 +41,8 @@ TOOLS = {
         "pip install pr-merge-audit", ["agent pull requests", "JSON report"]),
     "release-drift": ("Compares each package a lockfile change upgrades, so an agent's dependency bump shows the new code that runs at install or startup.",
         "pip install release-drift", ["CI recipe", "JSON", "PyPI", "npm"]),
+    "suite-gate": ("Runs the branch and pull request checks above together and gives one verdict from versioned rules, as a command, a GitHub Action or an MCP server for agents.",
+        "pip install suite-gate", ["GitHub Action", "MCP", "JSON"]),
     "devdrop": ("Installs one Android or iOS build on every attached phone, tablet, emulator and "
                 "simulator, and skips any device the build cannot run on, with the reason.",
                 "pip install git+https://github.com/jacob-adm/devdrop", ["JUnit", "JSON", "adb", "Xcode"]),
@@ -117,7 +119,7 @@ def header(key, t):
 STAGES = [
     ("Agent starts", ["glassbox reach"]),
     ("Agent branches", ["git surface", "git overlap"]),
-    ("Pull request and CI", ["trust-path", "release-drift", "pr-merge-audit"]),
+    ("Pull request and CI", ["trust-path", "release-drift", "pr-merge-audit", "suite-gate"]),
     ("Release", ["release-drift", "devdrop"]),
     ("Afterwards", ["glassbox persist", "bug-age"]),
 ]
